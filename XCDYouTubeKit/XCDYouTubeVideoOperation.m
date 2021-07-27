@@ -148,10 +148,10 @@ static NSError *YouTubeError(NSError *error, NSSet *regionsAllowed, NSString *la
 	{
 		NSString *eventLabel = [self.eventLabels objectAtIndex:0];
 		[self.eventLabels removeObjectAtIndex:0];
-		
-		NSDictionary *query = @{ @"video_id": self.videoIdentifier, @"hl": self.languageIdentifier, @"el": eventLabel, @"ps": @"default", @"html5" : @1, @"c":@"TVHTML5", @"cver":@6.20180913 };
+		NSLog(@"%@", eventLabel);
+		NSDictionary *query = @{ @"id": self.videoIdentifier};
 		NSString *queryString = XCDQueryStringWithDictionary(query);
-		NSURL *videoInfoURL = [NSURL URLWithString:[@"https://www.youtube.com/get_video_info?" stringByAppendingString:queryString]];
+		NSURL *videoInfoURL = [NSURL URLWithString:[@"https://www.googleapis.com/youtube/v3/videos?part=id%2C+snippet&key=AIzaSyDjT6ut-fnRkrDjR9Tv0oIW1ccuATKdYC0" stringByAppendingString:queryString]];
 		[self startRequestWithURL:videoInfoURL type:XCDYouTubeRequestTypeGetVideoInfo];
 	}
 }
